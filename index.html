@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fillify</title>
+    <style>
+      *,
+      *::after,
+      *::before {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: blanchedalmond;
+      }
+
+      .container {
+        width: 60%;
+        height: 60%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        background-color: aliceblue;
+        min-width: 240px;
+      }
+
+      .main-glass-container {
+        flex-basis: 49%;
+        min-width: 260px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .small-glass-container {
+        flex-basis: 49%;
+        min-width: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .main-glass {
+        height: 97%;
+        width: 75%;
+        background-color: white;
+        border: 1px solid black;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        overflow: hidden;
+      }
+
+      .remaining {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: inherit;
+        height: 50%;
+      }
+
+      .remaining > span {
+        background-color: inherit;
+        color: black;
+      }
+
+      .filled {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 0%;
+      }
+
+
+      
+      .heading-container{
+        width: 100%;
+        height: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .one-more-container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        height: 80%;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .small-glass{
+        flex-basis: 22%;
+        height: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        min-width: 55px;
+      }
+
+      .fill-styling {
+        background-color: lightskyblue;
+      }
+
+      .fill-styling > span {
+        color: blue;
+      }
+
+   @media screen and (max-width:360px) {
+    .container {
+        width: 100%;
+        height: 100%;
+    }
+   }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-glass-container">
+        <div class="main-glass">
+          <div class="remaining"><span>1000ml</span></div>
+          <div class="filled fill-styling"><span>50%</span></div>
+        </div>
+      </div>
+
+      <div class="small-glass-container">
+        <div class="heading-container">
+            <h2>Chug to hit goal!</h4>
+        </div>
+        <div class="one-more-container">
+          <div class="small-glass"><span>250ml</span></div>
+          <div class="small-glass"><span>250ml</span></div>
+          <div class="small-glass"><span>250ml</span></div>
+          <div class="small-glass"><span>250ml</span></div>
+          <div class="small-glass"><span>250ml</span></div>
+          <div class="small-glass"><span>250ml</span></div>
+          <div class="small-glass"><span>250ml</span></div>
+          <div class="small-glass"><span>250ml</span></div>
+        </div>
+      </div>
+    </div>
+
+<script>
+    let smallcups = document.querySelectorAll('.small-glass');
+    let remaining = document.querySelector('.remaining');
+    let filled = document.querySelector('.filled');
+    dosomething();
+    smallcups.forEach((smallcup)=>{
+        smallcup.addEventListener('click',function(){
+            smallcup.classList.toggle('fill-styling');
+            dosomething();
+        })
+    })
+   
+    function dosomething(){
+        let len = document.querySelectorAll('.small-glass.fill-styling').length;
+        filled.style.height = String(len*12.5)+'%'
+        remaining.style.height = String(100 - (len*12.5))+'%'
+
+        if(filled.style.height=='100%'){
+            remaining.querySelector('span').style.display='none';
+        }
+        else{
+            remaining.querySelector('span').style.display='';
+            remaining.querySelector('span').innerText=String(100 - (len*12.5))+'%'
+        }
+
+        if(remaining.style.height=='100%'){
+            filled.querySelector('span').style.display='none';
+        }
+        else{
+            filled.querySelector('span').style.display='';
+            filled.querySelector('span').innerText = String(len*12.5)+'%'
+        }
+        
+    }
+
+</script>
+  </body>
+</html>
